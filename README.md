@@ -2,4 +2,8 @@
 Script to generate DRI3 Mesa Turnip drivers for Arch Linux Arm
 
 # Instructions
-Clone this repo, make build.sh executable by `chmod +x build.sh`, then run it with `./build.sh`. Install the generated `pkg.tar.xz`. And you are done!
+Run this command in your terminal:
+```
+wget https://raw.githubusercontent.com/jamlotrasoiaf/turnip-drivers-arch-arm/refs/heads/main/build.sh && chmod +x build.sh &&./build.sh
+```
+You should get a file called `mesa-vulkan-drivers-{VERSION}.pkg.tar.xz` in your working directory. Install it with `sudo pacman -U`. And you are done!
