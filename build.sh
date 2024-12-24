@@ -8,9 +8,9 @@ cd mesa-main
 sudo pacman -S --needed make cmake git wget vulkan-tools mesa-utils meson clang gcc python python-packaging python-mako python-yaml flex bison
 
 # apply patches
-git apply -v ../dri3.patch
-git apply -v ../fix-for-anon-file.patch
-git apply -v ../fix-for-getprogname.patch
+patch -p1 < ../dri3.patch
+patch -p1 < ../fix-for-anon-file.patch
+patch -p1 < ../fix-for-getprogname.patch
 
 # install build dependencies
 sudo pacman -S --needed zlib expat libdrm libx11 libxcb libxext libxdamage libxshmfence libxxf86vm libxrandr wayland wayland-protocols egl-wayland
