@@ -28,7 +28,7 @@ arch=$(uname -r)
 version=$(cat VERSION)
 
 # create PKGBUILD
-cd output
+cd build/output
 tar czf usr.tar.gz usr/
 rm -rf usr/
 
