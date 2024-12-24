@@ -1,5 +1,9 @@
-# switch to bash because FISH SUCKS
-exec bash
+#!/bin/bash
+
+# okay im just here to say FISH DIE. RUINING MY PRETTY SCRIPT. MF
+
+#install basics
+sudo pacman -S --needed base-devel make cmake git wget vulkan-tools mesa-utils meson clang gcc python python-packaging python-mako python-yaml flex bison
 
 # get latest version and extract it
 wget https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz
@@ -7,13 +11,14 @@ tar xf mesa-main.tar.gz
 rm mesa-main.tar.gz
 cd mesa-main
 
-# install mesa dependencies
-sudo pacman -S --needed base-devel make cmake git wget vulkan-tools mesa-utils meson clang gcc python python-packaging python-mako python-yaml flex bison
-
 # apply patches
-patch -p1 < ../dri3.patch
-patch -p1 < ../fix-for-anon-file.patch
-patch -p1 < ../fix-for-getprogname.patch
+wget https://raw.githubusercontent.com/jamlotrasoiaf/turnip-drivers-arch-arm/refs/heads/main/dri3.patch
+wget https://raw.githubusercontent.com/jamlotrasoiaf/turnip-drivers-arch-arm/refs/heads/main/fix-for-anon-file.patch
+wget https://raw.githubusercontent.com/jamlotrasoiaf/turnip-drivers-arch-arm/refs/heads/main/fix-for-getprogname.patch
+patch -p1 < dri3.patch
+patch -p1 < fix-for-anon-file.patch
+patch -p1 < fix-for-getprogname.patch
+rm *.patch
 
 # install build dependencies
 sudo pacman -S --needed zlib expat libdrm libx11 libxcb libxext libxdamage libxshmfence libxxf86vm libxrandr wayland wayland-protocols egl-wayland
@@ -51,5 +56,6 @@ package() {
 }" > PKGBUILD
 makepkg
 
-# exit from bash. fish i hate you
-exit
+# return to start, clean up dirs
+mv *.tar.xz ../../../
+rm -rf mesa-main/
