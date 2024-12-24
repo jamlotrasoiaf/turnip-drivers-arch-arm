@@ -1,5 +1,5 @@
 # switch to bash because FISH SUCKS
-bash
+exec bash
 
 # get latest version and extract it
 wget https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz
