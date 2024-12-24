@@ -1,3 +1,6 @@
+# switch to bash because FISH SUCKS
+bash
+
 # get latest version and extract it
 wget https://gitlab.freedesktop.org/mesa/mesa/-/archive/main/mesa-main.tar.gz
 tar xf mesa-main.tar.gz
@@ -5,7 +8,7 @@ rm mesa-main.tar.gz
 cd mesa-main
 
 # install mesa dependencies
-sudo pacman -S --needed make cmake git wget vulkan-tools mesa-utils meson clang gcc python python-packaging python-mako python-yaml flex bison
+sudo pacman -S --needed base-devel make cmake git wget vulkan-tools mesa-utils meson clang gcc python python-packaging python-mako python-yaml flex bison
 
 # apply patches
 patch -p1 < ../dri3.patch
@@ -20,15 +23,9 @@ meson setup build -Dprefix=/usr -Dcpp_rtti=false -Dgbm=disabled -Dopengl=false -
 meson compile -C build
 meson install -C build --destdir=output
 
-# determine architecture of cpu and set version code
-if [[ $SHELL == *"fish"* ]]
-then
-  set arch $(uname -r)
-  set version $(cat VERSION)
-else
-  arch=$(uname -r)
-  version=$(cat VERSION)
-fi
+# set cpu architecture and version code
+arch=$(uname -r)
+version=$(cat VERSION)
 
 # create PKGBUILD
 cd output
@@ -53,3 +50,6 @@ package() {
         cp \"${srcdir}/usr/share/vulkan/icd.d/freedreno_icd.aarch64.json\" \"${pkgdir}/usr/share/vulkan/icd.d/freedreno_icd.aarch64.json\"
 }" > PKGBUILD
 makepkg
+
+# exit from bash. fish i hate you
+exit
