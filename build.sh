@@ -30,9 +30,9 @@ meson compile -C build
 meson install -C build --destdir=output
 
 # set cpu architecture and version code
-arch="$(uname -m)"
-long="$(cat VERSION)"
-version="${long:0:6}"
+arch=$(uname -m)
+long=$(cat VERSION)
+version=${long:0:6}
 
 # create PKGBUILD
 cd build/output
