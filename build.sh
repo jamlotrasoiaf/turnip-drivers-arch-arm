@@ -52,7 +52,7 @@ package() {
         tar xvf \"${srcdir}/usr.tar.gz\"
         rm \"${srcdir}/usr.tar.gz\"
         mkdir -p \"${pkgdir}/usr\"
-        mv \"${srcdir}/usr/* \"${pkgdir}/usr/\"
+        mv \"${srcdir}/usr/*\" \"${pkgdir}/usr/\"
 }" > PKGBUILD
 makepkg
 
