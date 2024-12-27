@@ -51,10 +51,8 @@ sha512sums=(\"SKIP\")
 package() {
         tar xvf \"${srcdir}/usr.tar.gz\"
         rm \"${srcdir}/usr.tar.gz\"
-        mkdir -p \"${pkgdir}/usr/lib\"
-        mkdir -p \"${pkgdir}/usr/share/vulkan/icd.d\"
-        cp \"${srcdir}/usr/lib/libvulkan_freedreno.so\" \"${pkgdir}/usr/lib/libvulkan_freedreno.so\"
-        cp \"${srcdir}/usr/share/vulkan/icd.d/freedreno_icd.aarch64.json\" \"${pkgdir}/usr/share/vulkan/icd.d/freedreno_icd.aarch64.json\"
+        mkdir -p \"${pkgdir}/usr\"
+        mv \"${srcdir}/usr/* \"${pkgdir}/usr/\"
 }" > PKGBUILD
 makepkg
 
